@@ -57,11 +57,29 @@ export function initBot(username) {
         username: username,
         host: settings.host,
         port: settings.port,
-        auth: settings.auth,
+        auth: settings.auth === 'yggdrasil' ? 'mojang' : settings.auth, // Use mojang auth type for yggdrasil
         version: mc_version,
     }
     if (!mc_version || mc_version === "auto") {
         delete options.version;
+    }
+    
+    // Add yggdrasil authentication options for third-party skin sites
+    if (settings.auth === 'yggdrasil') {
+        // Validate required yggdrasil settings
+        if (!settings.auth_server || settings.auth_server.trim() === '') {
+            throw new Error('Yggdrasil authentication requires auth_server to be set in settings.js');
+        }
+        if (!settings.session_server || settings.session_server.trim() === '') {
+            throw new Error('Yggdrasil authentication requires session_server to be set in settings.js');
+        }
+        if (!settings.yggdrasil_password || settings.yggdrasil_password.trim() === '') {
+            throw new Error('Yggdrasil authentication requires yggdrasil_password to be set in settings.js or YGGDRASIL_PASSWORD environment variable');
+        }
+        
+        options.authServer = settings.auth_server;
+        options.sessionServer = settings.session_server;
+        options.password = settings.yggdrasil_password;
     }
 
     const bot = createBot(options);

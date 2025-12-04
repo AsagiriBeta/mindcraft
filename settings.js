@@ -2,7 +2,14 @@ const settings = {
     "minecraft_version": "auto", // or specific version like "1.21.6"
     "host": "127.0.0.1", // or "localhost", "your.ip.address.here"
     "port": 55916, // set to -1 to automatically scan for open ports
-    "auth": "offline", // or "microsoft"
+    "auth": "offline", // "offline", "microsoft", or "yggdrasil" (for third-party skin sites like LittleSkin)
+    
+    // Yggdrasil authentication settings (only used when auth is "yggdrasil")
+    // For LittleSkin: auth_server: "https://littleskin.cn/api/yggdrasil/authserver", session_server: "https://littleskin.cn/api/yggdrasil/sessionserver"
+    // For Blessing Skin: use your skin site's yggdrasil API URLs
+    "auth_server": "", // Yggdrasil auth server URL (e.g., "https://littleskin.cn/api/yggdrasil/authserver")
+    "session_server": "", // Yggdrasil session server URL (e.g., "https://littleskin.cn/api/yggdrasil/sessionserver")
+    "yggdrasil_password": "", // Password for yggdrasil authentication. Can also be set via YGGDRASIL_PASSWORD env var
 
     // the mindserver manages all agents and hosts the UI
     "mindserver_port": 8080,
@@ -66,6 +73,11 @@ if (process.env.SETTINGS_JSON) {
     } catch (err) {
         console.error("Failed to parse SETTINGS_JSON:", err);
     }
+}
+
+// Environment variables for sensitive yggdrasil credentials
+if (process.env.YGGDRASIL_PASSWORD) {
+    settings.yggdrasil_password = process.env.YGGDRASIL_PASSWORD;
 }
 
 export default settings;
