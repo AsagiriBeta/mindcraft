@@ -9,7 +9,7 @@ const settings = {
     // For Blessing Skin: use your skin site's yggdrasil API URLs
     "auth_server": "", // Yggdrasil auth server URL (e.g., "https://littleskin.cn/api/yggdrasil/authserver")
     "session_server": "", // Yggdrasil session server URL (e.g., "https://littleskin.cn/api/yggdrasil/sessionserver")
-    "yggdrasil_password": "", // Password for yggdrasil authentication (email/username is set in profile)
+    "yggdrasil_password": "", // Password for yggdrasil authentication. Can also be set via YGGDRASIL_PASSWORD env var
 
     // the mindserver manages all agents and hosts the UI
     "mindserver_port": 8080,
@@ -73,6 +73,11 @@ if (process.env.SETTINGS_JSON) {
     } catch (err) {
         console.error("Failed to parse SETTINGS_JSON:", err);
     }
+}
+
+// Environment variables for sensitive yggdrasil credentials
+if (process.env.YGGDRASIL_PASSWORD) {
+    settings.yggdrasil_password = process.env.YGGDRASIL_PASSWORD;
 }
 
 export default settings;

@@ -113,6 +113,13 @@ To use yggdrasil authentication, configure `settings.js` as follows:
 "yggdrasil_password": "your_password",  // Your skin site account password
 ```
 
+> [!Tip]
+> For better security, you can set the password via environment variable instead of putting it in the config file:
+> ```bash
+> export YGGDRASIL_PASSWORD="your_password"
+> node main.js
+> ```
+
 > [!Note]
 > The bot's username in the profile.json should be your skin site account email or username (depending on the skin site's requirements). Common yggdrasil server URLs:
 > - **LittleSkin**: `auth_server: "https://littleskin.cn/api/yggdrasil/authserver"`, `session_server: "https://littleskin.cn/api/yggdrasil/sessionserver"`
