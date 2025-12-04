@@ -67,13 +67,13 @@ export function initBot(username) {
     // Add yggdrasil authentication options for third-party skin sites
     if (settings.auth === 'yggdrasil') {
         // Validate required yggdrasil settings
-        if (!settings.auth_server) {
+        if (!settings.auth_server || settings.auth_server.trim() === '') {
             throw new Error('Yggdrasil authentication requires auth_server to be set in settings.js');
         }
-        if (!settings.session_server) {
+        if (!settings.session_server || settings.session_server.trim() === '') {
             throw new Error('Yggdrasil authentication requires session_server to be set in settings.js');
         }
-        if (!settings.yggdrasil_password) {
+        if (!settings.yggdrasil_password || settings.yggdrasil_password.trim() === '') {
             throw new Error('Yggdrasil authentication requires yggdrasil_password to be set in settings.js or YGGDRASIL_PASSWORD environment variable');
         }
         
