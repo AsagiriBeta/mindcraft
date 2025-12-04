@@ -102,6 +102,22 @@ To connect to online servers your bot will need an official Microsoft/Minecraft 
 
 To use different accounts, Mindcraft will connect with the account that the Minecraft launcher is currently using. You can switch accounts in the launcher, then run `node main.js`, then switch to your main account after the bot has connected.
 
+## Third-Party Authentication (Yggdrasil)
+For servers that support third-party authentication through authlib-injector (like LittleSkin, Blessing Skin, etc.), you can use the yggdrasil authentication method. This is useful for servers that use multi-login to support both Microsoft accounts and third-party skin site accounts.
+
+To use yggdrasil authentication, configure `settings.js` as follows:
+```javascript
+"auth": "yggdrasil",
+"auth_server": "https://littleskin.cn/api/yggdrasil/authserver",  // Your skin site's auth server URL
+"session_server": "https://littleskin.cn/api/yggdrasil/sessionserver",  // Your skin site's session server URL
+"yggdrasil_password": "your_password",  // Your skin site account password
+```
+
+> [!Note]
+> The bot's username in the profile.json should be your skin site account email or username (depending on the skin site's requirements). Common yggdrasil server URLs:
+> - **LittleSkin**: `auth_server: "https://littleskin.cn/api/yggdrasil/authserver"`, `session_server: "https://littleskin.cn/api/yggdrasil/sessionserver"`
+> - **Blessing Skin**: Check your skin site's yggdrasil API documentation for the correct URLs
+
 ## Tasks
 
 Tasks automatically start the bot with a prompt and a goal item to aquire or blueprint to construct. To run a simple task that involves collecting 4 oak_logs run 
